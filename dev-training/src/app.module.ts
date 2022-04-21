@@ -15,7 +15,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       password: 'postgresql',
       database: 'postgres',
       autoLoadEntities: true,
-      synchronize: true,
+      entities: ['dist/**/*.entity.js'],
+      migrations: ['src/migrations/*.ts'],
+      //synchronize: true, nunca usar essa porra em produção
     }),
   ],
   controllers: [AppController],

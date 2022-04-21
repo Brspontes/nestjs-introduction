@@ -16,7 +16,9 @@ export class CoursesService {
     private readonly tagRepository: Repository<Tag>,
   ) {}
   findAll() {
-    return this.courseRepository.find();
+    return this.courseRepository.find({
+      relations: ['tags'],
+    });
   }
 
   findOne(id: string) {
@@ -24,6 +26,7 @@ export class CoursesService {
       where: {
         id: Number(id),
       },
+      relations: ['tags'],
     });
     if (!course) {
       throw new NotFoundException(`Course id: ${id} não encontrado`);
