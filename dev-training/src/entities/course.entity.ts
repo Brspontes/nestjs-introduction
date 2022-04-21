@@ -1,4 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Tag } from './tag.entity';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  JoinTable,
+  ManyToMany,
+} from 'typeorm';
 
 @Entity('courses')
 export class Course {
@@ -11,6 +18,7 @@ export class Course {
   @Column()
   description: string;
 
-  @Column('json', { nullable: true })
-  tags: string[];
+  @JoinTable()
+  @ManyToMany(() => Tag, (tag) => tag.courses, { cascade: true })
+  tags: Tag[];
 }
