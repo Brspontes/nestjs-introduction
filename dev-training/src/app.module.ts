@@ -9,15 +9,14 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     CoursesModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
-      port: 5440,
+      host: 'db',
+      port: 5432,
       username: 'postgres',
       password: 'postgresql',
-      database: 'postgres',
-      autoLoadEntities: true,
-      entities: ['dist/**/*.entity.js'],
-      migrations: ['src/migrations/*.ts'],
-      //synchronize: true, nunca usar essa porra em produção
+      database: 'cursonestjs',
+      autoLoadEntities: false,
+      entities: [__dirname + '/**/*.entity.ts'],
+      synchronize: false, //nunca usar essa porra em produção
     }),
   ],
   controllers: [AppController],

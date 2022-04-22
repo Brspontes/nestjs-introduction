@@ -1,10 +1,18 @@
 import { Course } from './course.entity';
-import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  BeforeInsert,
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { v4 as uuidv4 } from 'uuid';
 
 @Entity('tags')
 export class Tag {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Column()
   name: string;
@@ -14,4 +22,13 @@ export class Tag {
 
   @ManyToMany(() => Course, (course) => course.tags)
   courses: Course[];
+
+  @CreateDateColumn({ type: 'timestamp' })
+  createdAt: Date;
+
+  @BeforeInsert()
+  generetedId() {
+    if (this.id) return;
+    this.id = uuidv4();
+  }
 }
