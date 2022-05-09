@@ -4,7 +4,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateCourseDto } from './dto/create-course.dto';
-import { Tag } from 'src/entities/tag.entity';
+import { Tag } from './../entities/tag.entity';
 
 @Injectable()
 export class CoursesService {
@@ -12,7 +12,7 @@ export class CoursesService {
     @InjectRepository(Course)
     private readonly courseRepository: Repository<Course>,
 
-    @InjectRepository(Course)
+    @InjectRepository(Tag)
     private readonly tagRepository: Repository<Tag>,
   ) {}
   findAll() {
